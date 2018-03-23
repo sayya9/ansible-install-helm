@@ -1,0 +1,22 @@
+---
+- name: create serviceaccount
+  shell: kubectl create sa --namespace kube-system tiller
+  register: result
+  changed_when: "'created' in result.stdout"
+  failed_when: "result.failed is defined and 'already exists' not in result.stderr"
+
+- name: create clusterrolebinding
+  shell: kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+  register: result
+  changed_when: "'created' in result.stdout"
+  failed_when: "result.failed is defined and 'already exists' not in result.stderr"
+
+- name: check serviceaccount field in {{ helm_tiller }} deployment
+  shell: kubectl get deploy {{ helm_tiller }} -n kube-system -o yaml
+  register: result
+  changed_when: False
+
+- name: update field of {{ helm_tiller }} deployment
+  shell: kubectl patch deploy {{ helm_tiller }} -n kube-system -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+  register: result
+  when: "'serviceAccount: tiller' not in result.stdout"

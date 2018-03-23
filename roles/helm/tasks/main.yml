@@ -1,0 +1,29 @@
+---
+- name: download helm
+  unarchive: 
+    src: "{{ helm_url }}"
+    dest: /tmp
+    copy: no
+
+- name: create the installation directory
+  become: yes
+  file:
+    path: "{{ helm_bin_dir }}"
+    state: directory
+
+- name: copy helm binary
+  become: yes
+  copy:
+    src: /tmp/linux-amd64/helm
+    dest: "{{ helm_bin_dir }}"
+    mode: 0755
+    remote_src: yes
+
+- name: cleanup
+  become: yes
+  file:
+    path: /tmp/linux-amd64
+    state: absent
+
+- include_tasks: tiller.yml
+- include_tasks: rbac.yml

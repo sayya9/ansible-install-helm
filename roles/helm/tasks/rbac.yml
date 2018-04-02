@@ -1,4 +1,10 @@
 ---
+- name: create kubectl soft link
+  file:
+    src: "/usr/local/bin/kubectl"
+    dest: "/usr/bin/kubectl"
+    state: link
+
 - name: create serviceaccount
   shell: kubectl create sa --namespace kube-system tiller
   register: result
@@ -9,7 +15,7 @@
   shell: kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
   register: result
   changed_when: "'created' in result.stdout"
-  failed_when: "result.rc != 0 is defined and 'already exists' not in result.stderr"
+  failed_when: "result.rc != 0 and 'already exists' not in result.stderr"
 
 - name: check serviceaccount field in {{ helm_tiller }} deployment
   shell: kubectl get deploy {{ helm_tiller }} -n kube-system -o yaml

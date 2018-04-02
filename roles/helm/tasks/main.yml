@@ -19,6 +19,12 @@
     mode: 0755
     remote_src: yes
 
+- name: create helm soft link
+  file:
+    src: "{{ helm_bin_dir }}/helm"
+    dest: "/usr/bin/helm"
+    state: link
+
 - name: cleanup
   become: yes
   file:

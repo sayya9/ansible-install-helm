@@ -6,13 +6,11 @@
     copy: no
 
 - name: create the installation directory
-  become: yes
   file:
     path: "{{ helm_bin_dir }}"
     state: directory
 
 - name: copy helm binary
-  become: yes
   copy:
     src: /tmp/linux-amd64/helm
     dest: "{{ helm_bin_dir }}"
@@ -26,7 +24,6 @@
     state: link
 
 - name: cleanup
-  become: yes
   file:
     path: /tmp/linux-amd64
     state: absent

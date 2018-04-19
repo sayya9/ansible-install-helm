@@ -31,7 +31,7 @@ localhost ansible_connection=local
 下載helm tgz檔到本機
 
 ```
-ansible-playbook -i inventory/local/hosts.ini -b external.yml
+ansible-playbook -i inventory/local/hosts.ini -b prepare.yml
 ```
 
 檔案想辦法抄過去遠端

@@ -1,5 +1,8 @@
 *.retry
 *.lab
 *.company
+*.tar.gz
+*.tgz
 inventory/*
 !inventory/example
+!inventory/local

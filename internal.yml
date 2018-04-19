@@ -1,0 +1,5 @@
+---
+- hosts: all
+  roles:
+    - { role: simple_http_server }
+    - { role: helm, helm_url: "http://localhost:{{ simple_http_server_port }}/helm-{{ helm_version }}-linux-amd64.tar.gz" }

@@ -1,0 +1,11 @@
+---
+- block:
+  - name: start http server
+    shell: "(cd files && python -mSimpleHTTPServer {{ simple_http_server_port }} >/dev/null 2>&1 &)"
+    async: 10
+    poll: 0
+    notify: kill
+  rescue:
+    - name: stop http server
+      shell: /bin/true
+      notify: kill

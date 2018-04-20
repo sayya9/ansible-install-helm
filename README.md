@@ -17,7 +17,7 @@ tp-lab01 ansible_ssh_host=192.168.2.21
 
 ```
 cp -a inventory/example inventory/your_server
-ansible-playbook -i inventory/your_server/hosts.ini -b external.yml
+ansible-playbook -i inventory/your_server/hosts.ini -b install.yml
 ```
 
 ### 像是銀行之類環境無外網
@@ -45,5 +45,5 @@ scp -r . remote-server:~
 ```
 ssh remote-server
 cd ansible-install-helm
-ansible-playbook -i inventory/local/hosts.ini -b internal.yml
+ansible-playbook -i inventory/local/hosts.ini -b local-install.yml
 ```

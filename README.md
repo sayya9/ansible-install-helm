@@ -37,7 +37,7 @@ ansible-playbook -i inventory/local/hosts.ini -b prepare.yml
 檔案想辦法抄過去遠端
 
 ```
-scp -r . remote-server:~
+scp -r . remote-server:~/ansible-install-helm
 ```
 
 在遠端server執行local安裝，我用了python起一個臨時simple http server的技巧

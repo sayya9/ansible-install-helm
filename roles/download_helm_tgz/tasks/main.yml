@@ -1,0 +1,5 @@
+---
+- name: download helm tgz to local
+  get_url:
+    url: "{{ helm_url }}"
+    dest: files/{{ helm_url | basename }}

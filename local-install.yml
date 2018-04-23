@@ -1,5 +1,10 @@
 ---
-- hosts: all
+- name: local install
+  hosts: all
+  pre_tasks:
+    - name: load tiller image
+      command: docker load -i files/{{ tiller_image_repo | basename }}-{{ helm_version }}.tar
+
   roles:
     - { role: simple_http_server }
-    - { role: helm, helm_url: "http://localhost:{{ simple_http_server_port }}/helm-{{ helm_version }}-linux-amd64.tar.gz" }
+    - { role: helm, helm_url: "http://localhost:{{ simple_http_server_port }}/helm-{{ helm_version }}-linux-amd64.tar.gz", helm_refresh_cache: --skip-refresh }

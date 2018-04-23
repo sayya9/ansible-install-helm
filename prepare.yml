@@ -1,9 +1,12 @@
 ---
 - name: prepare for internal network env setup
   hosts: all
-  tasks:
-  - name: download helm tgz to local
-    get_url:
-      url: "{{ helm_url }}"
-      dest: files/{{ helm_url | basename }}
-    when: inventory_hostname == "localhost"
+  pre_tasks:
+    # For Mac OS X env
+    # See: https://github.com/ansible/ansible-modules-core/issues/4246
+    # Don't forget add ansible_python_interpreter=/usr/local/bin/python in inventory
+    - name: install docker-py
+      command: pip install docker-py
+  roles:
+    - { role: pull_tiller_image, tags: pull_tiller_image }
+    - { role: download_helm_tgz, tags: download_helm_tgz }

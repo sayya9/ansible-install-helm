@@ -3,3 +3,4 @@ helm_version: v2.8.2
 helm_url: https://storage.googleapis.com/kubernetes-helm/helm-{{ helm_version }}-linux-amd64.tar.gz
 helm_bin_dir: /opt/bin
 helm_tiller: tiller-deploy
+helm_refresh_cache: ""

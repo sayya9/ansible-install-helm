@@ -1,4 +1,5 @@
 ---
-- hosts: all
+- name: install helm with Internet
+  hosts: all
   roles:
     - { role: helm }

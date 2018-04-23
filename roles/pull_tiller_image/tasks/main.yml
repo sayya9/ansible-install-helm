@@ -1,0 +1,13 @@
+---
+- name: pull tiller images
+  docker_image:
+    name: "{{ tiller_image_repo }}"
+    tag: "{{ helm_version }}"
+    force: yes
+
+- name: archive tiller image
+  docker_image:
+    name: "{{ tiller_image_repo }}"
+    tag: "{{ helm_version }}"
+    force: yes
+    archive_path: files/{{ tiller_image_repo | basename }}-{{ helm_version }}.tar

@@ -25,10 +25,10 @@ ansible-playbook -i inventory/your_server/hosts.ini -b install.yml
 inventory/local/hosts.ini 就是localhost，都下載到本機
 
 ```
-localhost ansible_connection=local
+localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/python
 ```
 
-下載helm tgz檔到本機
+下載helm tgz, tiller image到本機
 
 ```
 ansible-playbook -i inventory/local/hosts.ini -b prepare.yml

@@ -7,6 +7,10 @@
     # Don't forget add ansible_python_interpreter=/usr/local/bin/python in inventory
     - name: install docker-py
       command: pip install docker-py
+
+    - name: Create files directory
+      file: path=files state=directory
+
   roles:
     - { role: pull_tiller_image, tags: pull_tiller_image }
     - { role: download_helm_tgz, tags: download_helm_tgz }

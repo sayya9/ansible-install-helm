@@ -20,6 +20,10 @@ cp -a inventory/example inventory/your_server
 ansible-playbook -i inventory/your_server/hosts.ini -b install.yml
 ```
 
+```
+ansible-playbook -i inventory/your_server/local -e helm_refresh_cache="--skip-refresh" --skip-tags=download -b install.yml
+```
+
 ### 像是銀行之類環境無外網
 
 inventory/local/hosts.ini 就是localhost，都下載到本機

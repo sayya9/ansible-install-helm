@@ -4,6 +4,7 @@
     src: "{{ helm_url }}"
     dest: /tmp
     copy: no
+  tags: download
 
 - name: create the installation directory
   file:
@@ -22,11 +23,6 @@
     src: "{{ helm_bin_dir }}/helm"
     dest: "/usr/bin/helm"
     state: link
-
-- name: cleanup
-  file:
-    path: /tmp/linux-amd64
-    state: absent
 
 - include_tasks: tiller.yml
 - include_tasks: rbac.yml
